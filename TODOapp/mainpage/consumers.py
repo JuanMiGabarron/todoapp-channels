@@ -1,7 +1,8 @@
-from channels import Group
-from mainpage.models import Todo
-import json
 from django.core import serializers
+from mainpage.models import Todo
+from channels import Group
+
+import json
 
 
 def ws_message(message):
@@ -12,21 +13,35 @@ def ws_message(message):
             todo = Todo(name=json_data.get('data'))
             todo.save()
             Group("todo").send({
-                "text": '{"action":"add", "data": ' + serializers.serialize('json', [todo]) + '}'
+                "text": (
+                    '{"action":"add", "data": '
+                    + serializers.serialize('json', [todo]) +
+                    '}'
+                )
             })
         elif action == 'del':
             Todo.objects.filter(pk=json_data.get('data')).delete()
             Group("todo").send({
-                "text": '{"action":"del", "data": ' + json_data.get('data') + '}'
+                "text": (
+                    '{"action":"del", "data": '
+                    + json_data.get('data') +
+                    '}'
+                )
             })
 
+
 def ws_connect(message):
-    message.reply_channel.send(
-        {
+    message.reply_channel.send({
         "accept": True,
-        "text": '{"action":"add", "data": ' + serializers.serialize('json', Todo.objects.all().order_by('date')) + '}'
-        }
-    )
+        "text": (
+            '{"action":"add", "data": '
+            + serializers.serialize(
+                'json',
+                Todo.objects.all().order_by('date')
+            ) +
+            '}'
+        )
+    })
     Group('todo').add(message.reply_channel)
 
 

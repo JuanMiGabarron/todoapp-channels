@@ -1,8 +1,4 @@
-from django.shortcuts import render, HttpResponse
-from mainpage.models import Todo
-from django.core import serializers
-
-import json
+from django.shortcuts import render
 
 
 def index(request):
