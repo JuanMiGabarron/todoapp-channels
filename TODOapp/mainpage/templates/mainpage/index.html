@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<!--
+    Miniport by HTML5 UP
+    html5up.net | @n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+{% load static %}
+<html>
+    <head>
+        <title>TODO</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <script src="{% static 'mainpage/js/jquery-3.1.1.min.js' %}"></script>
+        <script src="{% static 'mainpage/js/bootstrap.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'mainpage/css/bootstrap.min.css' %}" />
+        <script src="{% static 'mainpage/js/todos.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <h4><strong>TODO List</strong></h4>
+                    <hr>
+                    <hr>
+                    <ul id="todo_list" class="list-group">
+                    </ul>
+                    <br>
+                    <h4><strong>New TODO</strong></h4>
+                    <hr>
+                    <br>
+                    <div class="form-group">
+                        <input id="name_todo" type="text" class="form-control" name="name" placeholder="new todo">
+                    </div>
+                    <button id="send_todo" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
